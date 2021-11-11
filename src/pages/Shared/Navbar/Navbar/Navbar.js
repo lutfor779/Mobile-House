@@ -87,6 +87,16 @@ export default function Navbar() {
                         </Typography>
                     </Link>
 
+                    {
+                        user.email && <span>
+                            <Link to="/allOrders" style={{ textDecoration: 'none', color: 'white' }}>
+                                <Typography variant="button" display="block" sx={{ ml: 1 }}>
+                                    ALL Orders
+                                </Typography>
+                            </Link>
+                        </span>
+                    }
+
 
                     {
                         user.email ? <Button onClick={logOut} color="inherit"> Logout</Button> : <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>

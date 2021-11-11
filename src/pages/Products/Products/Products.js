@@ -7,25 +7,35 @@ import Navbar from '../../Shared/Navbar/Navbar/Navbar';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch(`http://localhost:5000/products`)
             .then(res => res.json())
-            .then(data => setProducts(data));
+            .then(data => {
+                setProducts(data);
+                setLoading(false);
+            });
     }, []);
 
     return (
         <div>
-            <Navbar />
-            <Container style={{ margin: '3rem auto' }}>
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 12, sm: 12, md: 12 }}>
-                        {
-                            products.map(product => <Product key={product._id} product={product} />)
-                        }
-                    </Grid>
+            {
+                loading ? <Box>
+                    <h1>Loading</h1>
+                </Box> : <Box>
+                    <Navbar />
+                    <Container style={{ margin: '3rem auto' }}>
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 12, sm: 12, md: 12 }}>
+                                {
+                                    products.map(product => <Product key={product._id} product={product} />)
+                                }
+                            </Grid>
+                        </Box>
+                    </Container>
                 </Box>
-            </Container>
+            }
         </div>
     );
 };
