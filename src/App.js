@@ -2,9 +2,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import AuthProvider from './context/AuthProvider';
 import Home from './pages/Home/Home/Home';
-import Products from './pages/Home/Products/Products/Products';
 import Login from './pages/Login/Login/Login';
 import PrivateRoute from './pages/Login/Private/PrivateRoute/PrivateRoute';
+import Resister from './pages/Login/Resister/Resister';
+import Products from './pages/Products/Products/Products';
+import TargetProduct from './pages/Products/TargetProduct/TargetProduct';
 
 function App() {
   return (
@@ -18,11 +20,17 @@ function App() {
             <Route path="/home">
               <Home />
             </Route>
-            <PrivateRoute path="/products">
+            <Route path="/products">
               <Products />
+            </Route>
+            <PrivateRoute path="/product/:id">
+              <TargetProduct />
             </PrivateRoute>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/resister">
+              <Resister />
             </Route>
           </Switch>
         </BrowserRouter>

@@ -77,13 +77,13 @@ export default function Navbar() {
                         {list()}
                     </Drawer>
 
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'left' }}>
                         <Link to="/home" style={{ textDecoration: 'none', color: 'white' }} >Mobile House</Link>
                     </Typography>
 
                     <Link to="/products" style={{ textDecoration: 'none', color: 'white' }}>
                         <Typography variant="button" display="block">
-                            Product
+                            Products
                         </Typography>
                     </Link>
 
