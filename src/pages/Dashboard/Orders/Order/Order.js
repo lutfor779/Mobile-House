@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import OrderStatus from '../Admin/OrderStatus/OrderStatus';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -29,11 +30,14 @@ const Order = ({ order }) => {
     const { img, price } = product;
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${orderId}`)
-            .then(res => res.json())
-            .then(data => {
-                setProduct(data);
-            })
+        const getProduct = () => {
+            fetch(`http://localhost:5000/products/${orderId}`)
+                .then(res => res.json())
+                .then(data => {
+                    setProduct(data);
+                })
+        }
+        return getProduct();
     }, [orderId]);
 
     return (
@@ -44,7 +48,7 @@ const Order = ({ order }) => {
             <StyledTableCell>{name}</StyledTableCell>
             <StyledTableCell>{email}</StyledTableCell>
             <StyledTableCell>{price}</StyledTableCell>
-            <StyledTableCell>Pending</StyledTableCell>
+            <StyledTableCell><OrderStatus></OrderStatus></StyledTableCell>
         </StyledTableRow>
     );
 };

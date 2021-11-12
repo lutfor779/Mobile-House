@@ -81,7 +81,6 @@ export default function Navbar() {
                 </Link >
             </List>
             <Divider />
-
         </Box>
     );
 
@@ -94,7 +93,7 @@ export default function Navbar() {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2, display: { md: 'none' } }}
+                        sx={{ mr: 2, display: { sm: 'none' } }}
                         onClick={toggleDrawer('left', true)}
                     >
                         <MenuIcon />

@@ -29,9 +29,12 @@ const MyOrders = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setOrders(data))
+        const getOrders = () => {
+            fetch(`http://localhost:5000/orders?email=${user.email}`)
+                .then(res => res.json())
+                .then(data => setOrders(data))
+        }
+        return getOrders();
     }, [user.email]);
 
 
