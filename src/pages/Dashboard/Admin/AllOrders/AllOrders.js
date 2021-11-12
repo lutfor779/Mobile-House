@@ -8,7 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Container } from '@mui/material';
-import Order from '../Order/Order';
+import Order from '../../Orders/Order/Order';
+
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -49,11 +50,12 @@ const AllOrders = () => {
                                 <StyledTableCell>Email</StyledTableCell>
                                 <StyledTableCell>Price</StyledTableCell>
                                 <StyledTableCell>Status</StyledTableCell>
+                                <StyledTableCell>Delete</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {
-                                orders.map(order => <Order key={order._id} order={order} />)
+                                orders.map(order => <Order key={order._id} order={order} orders={orders} setOrders={setOrders} />)
                             }
                         </TableBody>
                     </Table>

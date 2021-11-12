@@ -7,8 +7,6 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import useAuth from '../../../hooks/useAuth';
-import AllOrders from '../Orders/AllOrders/AllOrders';
-import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AdminRoute from '../../Login/Admin/AdminRoute/AdminRoute';
 import MyOrders from '../Orders/MyOrders/MyOrders';
 import { List } from '@mui/material';
@@ -22,6 +20,9 @@ import LocalMallIcon from '@mui/icons-material/LocalMall';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import AllOrders from '../Admin/AllOrders/AllOrders';
+import MakeAdmin from '../Admin/MakeAdmin/MakeAdmin';
+
 
 const Dashboard = () => {
     const { admin } = useAuth();

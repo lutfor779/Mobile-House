@@ -52,11 +52,12 @@ const MyOrders = () => {
                                 <StyledTableCell>Email</StyledTableCell>
                                 <StyledTableCell>Price</StyledTableCell>
                                 <StyledTableCell>Status</StyledTableCell>
+                                <StyledTableCell>Delete</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {
-                                orders.map(order => <Order key={order._id} order={order} />)
+                                orders.map(order => <Order key={order._id} order={order} orders={orders} setOrders={setOrders} />)
                             }
                         </TableBody>
                     </Table>

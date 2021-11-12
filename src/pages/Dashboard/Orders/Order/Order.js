@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import OrderStatus from '../Admin/OrderStatus/OrderStatus';
+import { Button } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -24,8 +24,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-const Order = ({ order }) => {
-    const { orderId, name, email } = order;
+const Order = ({ order, orders, setOrders }) => {
+    const { _id, orderId, name, email, status } = order;
     const [product, setProduct] = useState({});
     const { img, price } = product;
 
@@ -40,6 +40,25 @@ const Order = ({ order }) => {
         return getProduct();
     }, [orderId]);
 
+
+    const handleDelete = (id) => {
+        const result = window.confirm('Want to remove this item?');
+
+        if (result) {
+            fetch(`http://localhost:5000/orders/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount) {
+                        const remaining = orders.filter(order => order._id !== id);
+                        setOrders(remaining);
+                        alert('Deleted successfully');
+                    }
+                })
+        }
+    }
+
     return (
         <StyledTableRow>
             <StyledTableCell component="th" scope="row">
@@ -48,7 +67,16 @@ const Order = ({ order }) => {
             <StyledTableCell>{name}</StyledTableCell>
             <StyledTableCell>{email}</StyledTableCell>
             <StyledTableCell>{price}</StyledTableCell>
-            <StyledTableCell><OrderStatus></OrderStatus></StyledTableCell>
+            <StyledTableCell>{status}</StyledTableCell>
+            <StyledTableCell>
+                <Button variant="contained"
+                    size="small"
+                    color="error"
+                    onClick={() => handleDelete(_id)}
+                >
+                    Delete
+                </Button>
+            </StyledTableCell>
         </StyledTableRow>
     );
 };
