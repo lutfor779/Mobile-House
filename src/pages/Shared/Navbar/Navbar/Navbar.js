@@ -15,7 +15,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
-import Shop2Icon from '@mui/icons-material/Shop2';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 export default function Navbar() {
     const { user, logOut } = useAuth();
@@ -25,7 +28,6 @@ export default function Navbar() {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-
         setState({ ...state, [anchor]: open });
     };
 
@@ -37,18 +39,46 @@ export default function Navbar() {
             onKeyDown={toggleDrawer('left', false)}
         >
             <List>
-                <ListItem button >
-                    <ListItemIcon>
-                        <HomeIcon />
-                    </ListItemIcon>
-                    <Link to="/home" style={{ textDecoration: 'none' }}><ListItemText primary="Home" /></Link>
-                </ListItem>
-                <ListItem button >
-                    <ListItemIcon>
-                        <Shop2Icon />
-                    </ListItemIcon>
-                    <Link to="/products" style={{ textDecoration: 'none' }}><ListItemText primary="Products" /></Link>
-                </ListItem>
+                <Link to="/home" style={{ textDecoration: 'none' }}>
+                    <ListItem button >
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Home" />
+                    </ListItem>
+                </Link>
+                <Link to="/products" style={{ textDecoration: 'none' }}>
+                    <ListItem button >
+                        <ListItemIcon>
+                            <LocalMallIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Products" />
+                    </ListItem>
+                </Link>
+                <Link to="/myOrders" style={{ textDecoration: 'none' }}>
+                    <ListItem button >
+                        <ListItemIcon>
+                            <ShoppingCartIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="My Orders" />
+                    </ListItem>
+                </Link >
+                <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+                    <ListItem button >
+                        <ListItemIcon>
+                            <DashboardIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Dashboard" />
+                    </ListItem>
+                </Link >
+                <Link to="/allOrders" style={{ textDecoration: 'none' }}>
+                    <ListItem button >
+                        <ListItemIcon>
+                            <ShoppingBasketIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="All Orders" />
+                    </ListItem>
+                </Link >
             </List>
             <Divider />
 
@@ -64,7 +94,7 @@ export default function Navbar() {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2 }}
+                        sx={{ mr: 2, display: { md: 'none' } }}
                         onClick={toggleDrawer('left', true)}
                     >
                         <MenuIcon />
@@ -82,16 +112,16 @@ export default function Navbar() {
                     </Typography>
 
                     <Link to="/products" style={{ textDecoration: 'none', color: 'white' }}>
-                        <Typography variant="button" display="block">
+                        <Typography variant="button" display="block" >
                             Products
                         </Typography>
                     </Link>
 
                     {
                         user.email && <span>
-                            <Link to="/allOrders" style={{ textDecoration: 'none', color: 'white' }}>
+                            <Link to="/dashboard" style={{ textDecoration: 'none', color: 'white' }}>
                                 <Typography variant="button" display="block" sx={{ ml: 1 }}>
-                                    ALL Orders
+                                    Dashboard
                                 </Typography>
                             </Link>
                         </span>

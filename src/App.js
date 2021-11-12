@@ -1,12 +1,12 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import AuthProvider from './context/AuthProvider';
+import Dashboard from './pages/Dashboard/Dashboard/Dashboard';
+import MyOrders from './pages/Dashboard/Orders/MyOrders/MyOrders';
 import Home from './pages/Home/Home/Home';
 import Login from './pages/Login/Login/Login';
 import PrivateRoute from './pages/Login/Private/PrivateRoute/PrivateRoute';
 import Resister from './pages/Login/Resister/Resister';
-import AllOrders from './pages/Orders/AllOrders/AllOrders';
-import MyOrders from './pages/Orders/MyOrders/MyOrders';
 import Products from './pages/Products/Products/Products';
 import TargetProduct from './pages/Products/TargetProduct/TargetProduct';
 
@@ -28,8 +28,8 @@ function App() {
             <PrivateRoute path="/product/:id">
               <TargetProduct />
             </PrivateRoute>
-            <PrivateRoute path='/allOrders'>
-              <AllOrders />
+            <PrivateRoute path="/dashboard">
+              <Dashboard />
             </PrivateRoute>
             <PrivateRoute path="/myOrders">
               <MyOrders />

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Order from '../Order/Order';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,8 +8,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Container } from '@mui/material';
-import Navbar from '../../Shared/Navbar/Navbar/Navbar';
-import useAuth from '../../../hooks/useAuth';
+import useAuth from '../../../../hooks/useAuth';
+import Order from '../Order/Order';
+
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -36,11 +37,11 @@ const MyOrders = () => {
 
     return (
         <div>
-            <Navbar />
-            <h3>All order {orders.length}</h3>
+            <h3>{user.displayName}</h3>
+            <p>You have ordered total {orders.length} products</p>
             <Container>
                 <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <Table sx={{ minWidth: 700, maxWidth: 900, mx: 'auto' }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>Item</StyledTableCell>
