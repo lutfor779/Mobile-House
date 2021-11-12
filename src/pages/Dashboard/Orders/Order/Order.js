@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
+import useAuth from '../../../../hooks/useAuth';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -28,6 +29,9 @@ const Order = ({ order, orders, setOrders }) => {
     const { _id, orderId, name, email, status } = order;
     const [product, setProduct] = useState({});
     const { img, price } = product;
+    const { admin } = useAuth();
+
+    const [condition, setCondition] = useState(status);
 
     useEffect(() => {
         const getProduct = () => {
@@ -40,6 +44,29 @@ const Order = ({ order, orders, setOrders }) => {
         return getProduct();
     }, [orderId]);
 
+    const handleStatus = (id) => {
+        if (admin) {
+            const updateStatus = { status: 'Approved' };
+
+            fetch(`http://localhost:5000/orders/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(updateStatus)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        setCondition('Approved');
+                        alert('Product Status Set To Approved');
+                    }
+                })
+        }
+        else {
+            alert('Access Denied. You Do Not Have Permission.');
+        }
+    }
 
     const handleDelete = (id) => {
         const result = window.confirm('Want to remove this item?');
@@ -67,7 +94,11 @@ const Order = ({ order, orders, setOrders }) => {
             <StyledTableCell>{name}</StyledTableCell>
             <StyledTableCell>{email}</StyledTableCell>
             <StyledTableCell>{price}</StyledTableCell>
-            <StyledTableCell>{status}</StyledTableCell>
+            <StyledTableCell>
+                {
+                    condition === "Pending" ? <Button onClick={() => handleStatus(_id)} color="secondary">{condition}</Button> : <Button color="secondary">{condition}</Button>
+                }
+            </StyledTableCell>
             <StyledTableCell>
                 <Button variant="contained"
                     size="small"

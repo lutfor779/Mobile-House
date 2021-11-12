@@ -6,7 +6,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { Rating } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Product = ({ product }) => {
@@ -23,13 +22,13 @@ const Product = ({ product }) => {
                 />
 
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {name}
+                    <Typography gutterBottom variant="h6" component="div">
+                        {name.slice(0, 25).trim()}{name.length > 25 && '...'}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {price}
+                    <br />
+                    <Typography variant="button" color="warning.main">
+                        BDT {price}
                     </Typography>
-                    <Rating name="read-only" value={parseFloat('4')} readOnly />
                 </CardContent>
 
                 <CardActions sx={{ justifyContent: 'center' }}>

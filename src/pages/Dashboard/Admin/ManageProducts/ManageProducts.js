@@ -1,3 +1,4 @@
+import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -8,9 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Container } from '@mui/material';
-import Order from '../../Orders/Order/Order';
-
-
+import ManageProduct from '../ManageProduct/ManageProduct';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -22,47 +21,41 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
-
-const AllOrders = () => {
-    const [orders, setOrders] = useState([]);
-
+const ManageProducts = () => {
+    const [products, setProducts] = useState([]);
+    const [isUpdate, setIsUpdate] = useState(false);
     useEffect(() => {
-        const getOrders = () => {
-            fetch('http://localhost:5000/orders')
-                .then(res => res.json())
-                .then(data => {
-                    setOrders(data)
-                });
-        }
-        return getOrders();
-    }, []);
-
+        fetch(`http://localhost:5000/products`)
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data);
+            });
+    }, [isUpdate, setProducts]);
     return (
-        <div>
-            <h3>All order {orders.length}</h3>
+        <Box>
             <Container>
                 <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700, maxWidth: 900, mx: 'auto' }} aria-label="customized table">
+                    <Table sx={{ minWidth: 700, mx: 'auto' }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>Item</StyledTableCell>
                                 <StyledTableCell>Name</StyledTableCell>
-                                <StyledTableCell>Email</StyledTableCell>
+                                <StyledTableCell>Detail</StyledTableCell>
                                 <StyledTableCell>Price</StyledTableCell>
-                                <StyledTableCell>Status</StyledTableCell>
+                                <StyledTableCell>Update</StyledTableCell>
                                 <StyledTableCell>Delete</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {
-                                orders.map(order => <Order key={order._id} order={order} orders={orders} setOrders={setOrders} />)
+                                products.map(product => <ManageProduct key={product._id} product={product} setIsUpdate={setIsUpdate} products={products} setProducts={setProducts} />)
                             }
                         </TableBody>
                     </Table>
                 </TableContainer>
             </Container>
-        </div>
+        </Box>
     );
 };
 
-export default AllOrders;
+export default ManageProducts;

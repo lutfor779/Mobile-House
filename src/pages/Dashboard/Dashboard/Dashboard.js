@@ -4,12 +4,11 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import useAuth from '../../../hooks/useAuth';
 import AdminRoute from '../../Login/Admin/AdminRoute/AdminRoute';
 import MyOrders from '../Orders/MyOrders/MyOrders';
-import { List } from '@mui/material';
+import { Button, List } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ListItem from '@mui/material/ListItem';
@@ -18,14 +17,18 @@ import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import AllOrders from '../Admin/AllOrders/AllOrders';
 import MakeAdmin from '../Admin/MakeAdmin/MakeAdmin';
+import AddModeratorIcon from '@mui/icons-material/AddModerator';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import AddProduct from '../Admin/AddProduct/AddProduct';
+import UpdateIcon from '@mui/icons-material/Update';
+import ManageProducts from '../Admin/ManageProducts/ManageProducts';
 
 
 const Dashboard = () => {
-    const { admin } = useAuth();
+    const { user, admin, logOut } = useAuth();
     const [state, setState] = React.useState({ left: false });
 
     let { path, url } = useRouteMatch();
@@ -43,40 +46,23 @@ const Dashboard = () => {
             onClick={toggleDrawer('left', false)}
             onKeyDown={toggleDrawer('left', false)}
         >
-            <List>
-                <Link to="/home" style={{ textDecoration: 'none' }}>
-                    <ListItem button >
-                        <ListItemIcon>
-                            <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Home" />
-                    </ListItem>
-                </Link>
-                <Link to="/products" style={{ textDecoration: 'none' }}>
-                    <ListItem button >
-                        <ListItemIcon>
-                            <LocalMallIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Products" />
-                    </ListItem>
-                </Link>
-                <Link to={`${url}`} style={{ textDecoration: 'none' }}>
-                    <ListItem button >
-                        <ListItemIcon>
-                            <DashboardIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Dashboard" />
-                    </ListItem>
-                </Link>
-            </List>
-            <Divider />
+
             <List>
                 {
-                    admin && <Box>
+                    admin ? <Box>
+                        <Link to="/home" style={{ textDecoration: 'none' }}>
+                            <ListItem button >
+                                <ListItemIcon>
+                                    <HomeIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Home" />
+                            </ListItem>
+                        </Link>
+
                         <Link to={`${url}/makeAdmin`} style={{ textDecoration: 'none' }}>
                             <ListItem button >
                                 <ListItemIcon>
-                                    <AdminPanelSettingsIcon />
+                                    <AddModeratorIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Make Admin" />
                             </ListItem>
@@ -90,10 +76,53 @@ const Dashboard = () => {
                                 <ListItemText primary="All Orders" />
                             </ListItem>
                         </Link>
+
+                        <Link to={`${url}/addProduct`} style={{ textDecoration: 'none' }}>
+                            <ListItem button >
+                                <ListItemIcon>
+                                    <AddBoxIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Add Product" />
+                            </ListItem>
+                        </Link>
+
+                        <Link to={`${url}/manageProducts`} style={{ textDecoration: 'none' }}>
+                            <ListItem button >
+                                <ListItemIcon>
+                                    <UpdateIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Manage Products" />
+                            </ListItem>
+                        </Link>
+                    </Box> : <Box>
+                        <Link to="/home" style={{ textDecoration: 'none' }}>
+                            <ListItem button >
+                                <ListItemIcon>
+                                    <HomeIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Home" />
+                            </ListItem>
+                        </Link>
+                        <Link to="/products" style={{ textDecoration: 'none' }}>
+                            <ListItem button >
+                                <ListItemIcon>
+                                    <LocalMallIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Products" />
+                            </ListItem>
+                        </Link>
+                        <Link to={`${url}`} style={{ textDecoration: 'none' }}>
+                            <ListItem button >
+                                <ListItemIcon>
+                                    <DashboardIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Dashboard" />
+                            </ListItem>
+                        </Link>
                     </Box>
                 }
             </List>
-            <Divider />
+
         </Box>
     );
     return (
@@ -122,6 +151,11 @@ const Dashboard = () => {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'left' }}>
                             Dashboard
                         </Typography>
+                        {
+                            user.email ? <Button onClick={logOut} color="inherit"> Logout</Button> : <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
+                                <Button color="inherit" >Login</Button>
+                            </Link>
+                        }
                     </Toolbar>
                 </AppBar>
             </Box>
@@ -136,6 +170,12 @@ const Dashboard = () => {
                     </AdminRoute>
                     <AdminRoute path={`${path}/makeAdmin`}>
                         <MakeAdmin />
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/addProduct`}>
+                        <AddProduct />
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageProducts`}>
+                        <ManageProducts />
                     </AdminRoute>
                 </Switch>
             </Box>

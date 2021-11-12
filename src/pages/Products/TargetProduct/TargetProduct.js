@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Container, Rating } from '@mui/material';
+import { Container } from '@mui/material';
 import { Box } from '@mui/system';
 import useAuth from '../../../hooks/useAuth';
 import Navbar from '../../Shared/Navbar/Navbar/Navbar';
@@ -30,7 +30,7 @@ const TargetProduct = () => {
     }, [id]);
 
     const handleOrder = (id) => {
-        const orderDetails = { orderId: id, name: user.displayName, email: user.email, status: 'pending' }
+        const orderDetails = { orderId: id, name: user.displayName, email: user.email, status: 'Pending' }
         fetch(`http://localhost:5000/orders`, {
             method: 'POST',
             headers: {
@@ -62,6 +62,8 @@ const TargetProduct = () => {
                             <Typography variant="subtitle2" display="block" gutterBottom>
                                 {user.email}
                             </Typography>
+
+
                             <Card sx={{ minWidth: 300, maxWidth: 480, my: 3, mx: 'auto' }} elevation={6}>
                                 <CardMedia
                                     component="img"
@@ -73,10 +75,15 @@ const TargetProduct = () => {
                                     <Typography gutterBottom variant="h5" component="div">
                                         {product.name}
                                     </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {product.price}
+
+                                    <Typography variant="body2" gutterBottom component="div">
+                                        {product.detail}
                                     </Typography>
-                                    <Rating name="read-only" value={parseFloat('4')} readOnly />
+
+                                    <br />
+                                    <Typography variant="h6" color="warning.main">
+                                        BDT {product.price}
+                                    </Typography>
                                 </CardContent>
 
                                 <CardActions sx={{ justifyContent: 'center' }}>
