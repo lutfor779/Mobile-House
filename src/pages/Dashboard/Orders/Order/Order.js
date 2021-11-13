@@ -35,7 +35,7 @@ const Order = ({ order, orders, setOrders }) => {
 
     useEffect(() => {
         const getProduct = () => {
-            fetch(`http://localhost:5000/products/${orderId}`)
+            fetch(`https://frozen-dusk-78727.herokuapp.com/products/${orderId}`)
                 .then(res => res.json())
                 .then(data => {
                     setProduct(data);
@@ -48,7 +48,7 @@ const Order = ({ order, orders, setOrders }) => {
         if (admin) {
             const updateStatus = { status: 'Approved' };
 
-            fetch(`http://localhost:5000/orders/${id}`, {
+            fetch(`https://frozen-dusk-78727.herokuapp.com/orders/${id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
@@ -72,7 +72,7 @@ const Order = ({ order, orders, setOrders }) => {
         const result = window.confirm('Want to remove this item?');
 
         if (result) {
-            fetch(`http://localhost:5000/orders/${id}`, {
+            fetch(`https://frozen-dusk-78727.herokuapp.com/orders/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

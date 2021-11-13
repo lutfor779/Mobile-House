@@ -45,7 +45,7 @@ const ManageProduct = ({ product, setIsUpdate, products, setProducts }) => {
 
     const handleProductUpdate = (id) => {
         if (admin) {
-            fetch(`http://localhost:5000/products/${id}`, {
+            fetch(`https://frozen-dusk-78727.herokuapp.com/products/${id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
@@ -70,7 +70,7 @@ const ManageProduct = ({ product, setIsUpdate, products, setProducts }) => {
         const result = window.confirm('Want to remove this item?');
 
         if (result) {
-            fetch(`http://localhost:5000/products/${id}`, {
+            fetch(`https://frozen-dusk-78727.herokuapp.com/products/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

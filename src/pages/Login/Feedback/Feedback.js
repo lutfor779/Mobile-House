@@ -32,7 +32,7 @@ const Feedback = () => {
             name: user.displayName,
             email: user.email
         }
-        fetch(`http://localhost:5000/reviews`, {
+        fetch(`https://frozen-dusk-78727.herokuapp.com/reviews`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

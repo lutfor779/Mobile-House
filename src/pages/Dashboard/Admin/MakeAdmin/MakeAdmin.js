@@ -15,7 +15,7 @@ const MakeAdmin = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users`)
+        fetch(`https://frozen-dusk-78727.herokuapp.com/users`)
             .then(res => res.json())
             .then(data => {
                 setUsers(data);
@@ -30,7 +30,7 @@ const MakeAdmin = () => {
 
             if (isValid) {
                 const userEmail = { email };
-                fetch(`http://localhost:5000/users/admin`, {
+                fetch(`https://frozen-dusk-78727.herokuapp.com/users/admin`, {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'

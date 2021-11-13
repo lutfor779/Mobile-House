@@ -19,7 +19,7 @@ const AddProduct = () => {
     const handleProductSubmit = (e) => {
         e.preventDefault();
         if (admin) {
-            fetch('http://localhost:5000/products', {
+            fetch('https://frozen-dusk-78727.herokuapp.com/products', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

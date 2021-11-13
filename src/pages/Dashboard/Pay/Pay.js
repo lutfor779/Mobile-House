@@ -9,9 +9,6 @@ const Pay = () => {
                 <Typography variant="h4" gutterBottom sx={{ mt: 8, mb: 4, color: 'secondary.main' }}>
                     Payment system coming soon...
                 </Typography>
-                <Typography variant="h4" gutterBottom sx={{ mt: 8, mb: 4, color: 'secondary.main' }}>
-                    Payment system coming soon... we are ready for you
-                </Typography>
             </Paper>
         </Box>
     );
