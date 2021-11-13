@@ -1,39 +1,55 @@
 import { Button, TextField } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 
 
 const MakeAdmin = () => {
     const [email, setEmail] = useState('');
+    const [users, setUsers] = useState([]);
     const { admin } = useAuth();
 
     const handleOnBlur = e => {
         setEmail(e.target.value);
     }
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/users`)
+            .then(res => res.json())
+            .then(data => {
+                setUsers(data);
+            });
+    }, []);
+
+
     const handleAdminSubmit = e => {
         e.preventDefault();
         if (admin) {
-            console.log('can');
-            const user = { email };
-            fetch(`http://localhost:5000/users/admin`, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.modifiedCount) {
-                        alert('Admin successfully made');
-                        e.target.reset();
-                    }
+            const isValid = users.find(user => user.email === email);
+
+            if (isValid) {
+                const userEmail = { email };
+                fetch(`http://localhost:5000/users/admin`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(userEmail)
                 })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.modifiedCount) {
+                            alert('Admin successfully made');
+                            e.target.reset();
+                        }
+                    })
+            }
+            else {
+                alert('Not A Valid User. Try Right Email.')
+                e.target.reset();
+            }
         }
         else {
-            console.log('not')
             alert('You Do NOT Have Permission To MAKE ADMIN');
             e.target.reset();
         }
