@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Alert, AlertTitle, Container } from '@mui/material';
+import { Alert, AlertTitle, CircularProgress, Container } from '@mui/material';
 import Order from '../../Orders/Order/Order';
 import { Box } from '@mui/system';
 
@@ -44,6 +44,7 @@ const AllOrders = () => {
         <div>
             {
                 loading ? <Box><h1>Loading</h1>
+                    <CircularProgress />
                 </Box> : <Box>
                     <h3>All order {orders.length}</h3>
                     <Container>

@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import Footer from '../../Shared/Footer/Footer';
@@ -23,6 +24,7 @@ const Home = () => {
         <div>
             {
                 loading ? <Box><h1>Loading</h1>
+                    <CircularProgress />
                 </Box> : <Box>
                     <Header />
                     <Banner />

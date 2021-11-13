@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Container } from '@mui/material';
+import { CircularProgress, Container } from '@mui/material';
 import Product from '../Product/Product';
 import Navbar from '../../Shared/Navbar/Navbar/Navbar';
 import Footer from '../../Shared/Footer/Footer';
@@ -24,6 +24,7 @@ const Products = () => {
             {
                 loading ? <Box>
                     <h1>Loading</h1>
+                    <CircularProgress />
                 </Box> : <Box>
                     <Navbar />
                     <Container style={{ margin: '3rem auto' }}>

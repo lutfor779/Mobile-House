@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Alert, AlertTitle, Button, Container } from '@mui/material';
+import { Alert, AlertTitle, Button, CircularProgress, Container } from '@mui/material';
 import useAuth from '../../../../hooks/useAuth';
 import Order from '../Order/Order';
 import { Box } from '@mui/system';
@@ -54,6 +54,7 @@ const MyOrders = () => {
         <div>
             {
                 loading ? <Box><h1>Loading</h1>
+                    <CircularProgress />
                 </Box> : <Box>
                     <h3>{user.displayName}</h3>
                     <Container>
