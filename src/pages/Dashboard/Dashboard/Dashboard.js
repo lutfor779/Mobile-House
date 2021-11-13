@@ -16,7 +16,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import AllOrders from '../Admin/AllOrders/AllOrders';
 import MakeAdmin from '../Admin/MakeAdmin/MakeAdmin';
@@ -24,7 +23,14 @@ import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import AddProduct from '../Admin/AddProduct/AddProduct';
 import UpdateIcon from '@mui/icons-material/Update';
+import FeedbackIcon from '@mui/icons-material/Feedback';
 import ManageProducts from '../Admin/ManageProducts/ManageProducts';
+import PrivateRoute from '../../Login/Private/PrivateRoute/PrivateRoute';
+import Feedback from '../../Login/Feedback/Feedback';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import DashboardHome from '../DashboardHome/DashboardHome';
+import Pay from '../Pay/Pay';
 
 
 const Dashboard = () => {
@@ -111,12 +117,28 @@ const Dashboard = () => {
                                 <ListItemText primary="Products" />
                             </ListItem>
                         </Link>
-                        <Link to={`${url}`} style={{ textDecoration: 'none' }}>
+                        <Link to={`${path}/myOrders`} style={{ textDecoration: 'none' }}>
                             <ListItem button >
                                 <ListItemIcon>
-                                    <DashboardIcon />
+                                    <ShoppingBasketIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Dashboard" />
+                                <ListItemText primary="My Orders" />
+                            </ListItem>
+                        </Link>
+                        <Link to={`${path}/feedback`} style={{ textDecoration: 'none' }}>
+                            <ListItem button >
+                                <ListItemIcon>
+                                    <FeedbackIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Feedback" />
+                            </ListItem>
+                        </Link>
+                        <Link to={`${path}/pay`} style={{ textDecoration: 'none' }}>
+                            <ListItem button >
+                                <ListItemIcon>
+                                    <PaymentsIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Pay" />
                             </ListItem>
                         </Link>
                     </Box>
@@ -163,8 +185,17 @@ const Dashboard = () => {
             <Box>
                 <Switch>
                     <Route exact path={path}>
-                        <MyOrders />
+                        <DashboardHome />
                     </Route>
+                    <PrivateRoute path={`${path}/pay`}>
+                        <Pay />
+                    </PrivateRoute>
+                    <PrivateRoute path={`${path}/myOrders`}>
+                        <MyOrders />
+                    </PrivateRoute>
+                    <PrivateRoute path={`${path}/feedback`}>
+                        <Feedback />
+                    </PrivateRoute>
                     <AdminRoute path={`${path}/allOrders`}>
                         <AllOrders />
                     </AdminRoute>

@@ -1,4 +1,5 @@
-import { Button, TextField } from '@mui/material';
+import { Button, Container, Paper, TextField, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
@@ -55,18 +56,22 @@ const MakeAdmin = () => {
         }
     }
     return (
-        <div>
-            <h2>Make an Admin</h2>
-            <form onSubmit={handleAdminSubmit}>
-                <TextField label="Email"
-                    sx={{ minWidth: 345, width: '50%', mb: 2 }}
-                    type="email"
-                    onBlur={handleOnBlur}
-                    variant="standard" />
-                <br />
-                <Button type="submit" variant="contained">Make Admin</Button>
-            </form>
-        </div>
+        <Container>
+            <Typography variant="h4" gutterBottom sx={{ mt: 8, mb: 4, color: 'secondary.main' }}>Make User as Admin </Typography>
+            <Box sx={{ minWidth: 345, maxWidth: 480, mx: 'auto' }}>
+                <Paper elevation={6} sx={{ px: 2, py: 3 }}>
+                    <form onSubmit={handleAdminSubmit}>
+                        <TextField label="Email"
+                            sx={{ width: '90%', mb: 2 }}
+                            type="email"
+                            onBlur={handleOnBlur}
+                            variant="standard" />
+                        <br />
+                        <Button type="submit" variant="contained">Make Admin</Button>
+                    </form>
+                </Paper>
+            </Box>
+        </Container>
     );
 };
 

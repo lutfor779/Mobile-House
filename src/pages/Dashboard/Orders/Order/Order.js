@@ -96,7 +96,7 @@ const Order = ({ order, orders, setOrders }) => {
             <StyledTableCell>{price}</StyledTableCell>
             <StyledTableCell>
                 {
-                    condition === "Pending" ? <Button onClick={() => handleStatus(_id)} color="secondary">{condition}</Button> : <Button color="secondary">{condition}</Button>
+                    condition === "Pending" && admin ? <Button onClick={() => handleStatus(_id)} color="secondary">{condition}</Button> : <Button color="secondary">{condition}</Button>
                 }
             </StyledTableCell>
             <StyledTableCell>

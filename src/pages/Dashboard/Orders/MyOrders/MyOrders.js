@@ -7,9 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Container } from '@mui/material';
+import { Alert, AlertTitle, Button, Container } from '@mui/material';
 import useAuth from '../../../../hooks/useAuth';
 import Order from '../Order/Order';
+import { Box } from '@mui/system';
+import { useHistory } from 'react-router';
 
 
 
@@ -28,6 +30,8 @@ const MyOrders = () => {
     const [orders, setOrders] = useState([]);
     const { user } = useAuth();
 
+    const history = useHistory();
+
     useEffect(() => {
         const getOrders = () => {
             fetch(`http://localhost:5000/orders?email=${user.email}`)
@@ -38,30 +42,49 @@ const MyOrders = () => {
     }, [user.email]);
 
 
+    const handleClick = () => {
+        history.push('/products');
+    }
+
     return (
         <div>
             <h3>{user.displayName}</h3>
-            <p>You have ordered total {orders.length} products</p>
             <Container>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700, maxWidth: 900, mx: 'auto' }} aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Item</StyledTableCell>
-                                <StyledTableCell>Name</StyledTableCell>
-                                <StyledTableCell>Email</StyledTableCell>
-                                <StyledTableCell>Price</StyledTableCell>
-                                <StyledTableCell>Status</StyledTableCell>
-                                <StyledTableCell>Delete</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                orders.map(order => <Order key={order._id} order={order} orders={orders} setOrders={setOrders} />)
+                {
+                    orders.length > 0 ? <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 700, maxWidth: 900, mx: 'auto' }} aria-label="customized table">
+                            <TableHead>
+                                <TableRow>
+                                    <StyledTableCell>Item</StyledTableCell>
+                                    <StyledTableCell>Name</StyledTableCell>
+                                    <StyledTableCell>Email</StyledTableCell>
+                                    <StyledTableCell>Price</StyledTableCell>
+                                    <StyledTableCell>Status</StyledTableCell>
+                                    <StyledTableCell>Delete</StyledTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    orders.map(order => <Order key={order._id} order={order} orders={orders} setOrders={setOrders} />)
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer> : <Box>
+                        <Alert severity="warning"
+                            action={
+                                <Button color="primary"
+                                    size="small"
+                                    variant="outlined"
+                                    onClick={handleClick}
+                                >
+                                    Order
+                                </Button>
                             }
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                        >
+                            <AlertTitle>You have to order first — check it out!</AlertTitle>
+                        </Alert>
+                    </Box>
+                }
             </Container>
         </div>
     );

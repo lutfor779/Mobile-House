@@ -127,14 +127,6 @@ export default function Navbar() {
                     }
 
                     {
-                        user.email && <Link to="/feedback" style={{ textDecoration: 'none', color: 'white' }}>
-                            <Typography variant="button" display="block" sx={{ ml: 1 }}>
-                                Feedback
-                            </Typography>
-                        </Link>
-                    }
-
-                    {
                         user.email ? <Button onClick={logOut} color="inherit"> Logout</Button> : <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
                             <Button color="inherit" >Login</Button>
                         </Link>
