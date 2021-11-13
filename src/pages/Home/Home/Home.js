@@ -1,5 +1,6 @@
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import Footer from '../../Shared/Footer/Footer';
 import Banner from '../Banner/Banner';
 import ExtraSection from '../ExtraSetction/ExtraSection';
 import Header from '../Header/Header';
@@ -28,6 +29,7 @@ const Home = () => {
                     <HomeProducts products={products.slice(0, 6)} />
                     <Reviews />
                     <ExtraSection />
+                    <Footer />
                 </Box>
             }
         </div>

@@ -97,7 +97,8 @@ const Resister = () => {
 
                 {user.email && <Alert severity="success">Registration Successfully</Alert>
                 }
-
+                <br /><br /><br /><br />
+                <Button variant="outlined" color="error" onClick={() => history.push('/home')}>Cancel</Button>
 
             </Box>
         </Container>

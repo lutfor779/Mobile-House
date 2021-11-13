@@ -70,7 +70,8 @@ const Login = () => {
                 }
                 {user.email && <Alert severity="success">Login Successfully</Alert>
                 }
-
+                <br /><br /><br /><br />
+                <Button variant="outlined" color="error" onClick={() => history.push('/home')}>Cancel</Button>
             </Box>
         </Container>
     );

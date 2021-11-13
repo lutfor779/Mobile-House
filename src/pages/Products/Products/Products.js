@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import { Container } from '@mui/material';
 import Product from '../Product/Product';
 import Navbar from '../../Shared/Navbar/Navbar/Navbar';
+import Footer from '../../Shared/Footer/Footer';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -34,6 +35,7 @@ const Products = () => {
                             </Grid>
                         </Box>
                     </Container>
+                    <Footer />
                 </Box>
             }
         </div>
