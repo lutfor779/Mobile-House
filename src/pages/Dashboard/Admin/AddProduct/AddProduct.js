@@ -1,4 +1,4 @@
-import { Button, Container, TextField, Typography } from '@mui/material';
+import { Button, Container, Paper, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
@@ -41,55 +41,54 @@ const AddProduct = () => {
 
     return (
         <Container>
-            <Box sx={{ minWidth: 375, maxWidth: 480, mx: 'auto' }}>
-                <Typography variant="body1" gutterBottom>Add a product</Typography>
+            <Typography variant="h4" gutterBottom sx={{ mt: 8, mb: 4, color: 'secondary.main' }}>Add A Product </Typography>
 
-                {!isLoading && <form onSubmit={handleProductSubmit} >
-                    <TextField id="standard-basic"
-                        sx={{ width: "100%", m: 1 }}
-                        label="Product Name"
-                        type="text"
-                        name='name'
-                        onBlur={handleOnBlur}
-                        variant="standard"
-                        required />
+            <Box sx={{ minWidth: 345, maxWidth: 480, mx: 'auto' }}>
+                <Paper elevation={6} sx={{ px: 2, py: 3 }}>
+                    {!isLoading && <form onSubmit={handleProductSubmit} >
+                        <TextField id="standard-basic"
+                            sx={{ width: "90%", m: 1 }}
+                            label="Product Name"
+                            type="text"
+                            name='name'
+                            onBlur={handleOnBlur}
+                            variant="standard"
+                            required />
 
-                    <TextField id="standard-basic"
-                        sx={{ width: "100%", m: 1 }}
-                        label="Image URL"
-                        type="text"
-                        name='img'
-                        onBlur={handleOnBlur}
-                        variant="standard"
-                        required />
+                        <TextField id="standard-basic"
+                            sx={{ width: "90%", m: 1 }}
+                            label="Image URL"
+                            type="text"
+                            name='img'
+                            onBlur={handleOnBlur}
+                            variant="standard"
+                            required />
 
-                    <TextField id="standard-basic"
-                        sx={{ width: "100%", m: 1 }}
-                        label="Product Detail"
-                        type="text"
-                        name='detail'
-                        onBlur={handleOnBlur}
-                        variant="standard"
-                        required />
+                        <TextField id="standard-basic"
+                            sx={{ width: "90%", m: 1 }}
+                            label="Product Detail"
+                            type="text"
+                            name='detail'
+                            onBlur={handleOnBlur}
+                            variant="standard"
+                            required />
 
-                    <TextField id="standard-basic"
-                        label="Product Price"
-                        sx={{ width: "100%", m: 1 }}
-                        type="number"
-                        name='price'
-                        onBlur={handleOnBlur}
-                        variant="standard"
-                        required />
+                        <TextField id="standard-basic"
+                            label="Product Price"
+                            sx={{ width: "90%", m: 1 }}
+                            type="number"
+                            name='price'
+                            onBlur={handleOnBlur}
+                            variant="standard"
+                            required />
 
-                    <Button variant="contained"
-                        sx={{ width: '100%', m: 1 }}
-                        type="submit"
-                    >Add Product
-                    </Button>
-                </form>}
-
-
-
+                        <Button variant="contained"
+                            sx={{ width: '90%', m: 1 }}
+                            type="submit"
+                        >Add Product
+                        </Button>
+                    </form>}
+                </Paper>
             </Box>
         </Container>
     );

@@ -24,36 +24,44 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
     const [isUpdate, setIsUpdate] = useState(false);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         fetch(`https://frozen-dusk-78727.herokuapp.com/products`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
+                setLoading(false);
             });
     }, [isUpdate, setProducts]);
     return (
         <Box>
-            <Container>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700, mx: 'auto' }} aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Item</StyledTableCell>
-                                <StyledTableCell>Name</StyledTableCell>
-                                <StyledTableCell>Detail</StyledTableCell>
-                                <StyledTableCell>Price</StyledTableCell>
-                                <StyledTableCell>Update</StyledTableCell>
-                                <StyledTableCell>Delete</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                products.map(product => <ManageProduct key={product._id} product={product} setIsUpdate={setIsUpdate} products={products} setProducts={setProducts} />)
-                            }
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Container>
+            {
+                loading ? <Box><h1>Loading</h1>
+                </Box> : <Box>
+                    <Container>
+                        <TableContainer component={Paper}>
+                            <Table sx={{ minWidth: 700, mx: 'auto' }} aria-label="customized table">
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell>Item</StyledTableCell>
+                                        <StyledTableCell>Name</StyledTableCell>
+                                        <StyledTableCell>Detail</StyledTableCell>
+                                        <StyledTableCell>Price</StyledTableCell>
+                                        <StyledTableCell>Update</StyledTableCell>
+                                        <StyledTableCell>Delete</StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {
+                                        products.map(product => <ManageProduct key={product._id} product={product} setIsUpdate={setIsUpdate} products={products} setProducts={setProducts} />)
+                                    }
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Container>
+                </Box>
+            }
+
         </Box>
     );
 };

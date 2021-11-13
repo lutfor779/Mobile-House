@@ -9,14 +9,14 @@ const ExtraSection = () => {
         <Box
             component="div"
             sx={{
-                height: 700,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 overflow: 'hidden',
                 bgcolor: 'black',
-                color: 'white'
+                color: 'white',
+                p: 3
             }}
         >
             <Box
@@ -33,7 +33,7 @@ const ExtraSection = () => {
                     </Typography>
                 </Box>
 
-                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 12, sm: 12, md: 12 }} sx={{ alignItems: 'center' }}>
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 12, sm: 12, md: 12 }} sx={{ alignItems: 'center', justifyContent: 'center' }}>
                     <Grid item xs={12} sm={12} md={6} >
                         <img src="https://i.cdn.newsbytesapp.com/images/l142_5951592045581.jpg" alt="img" width="100%" />
                     </Grid>
