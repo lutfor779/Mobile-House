@@ -28,7 +28,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const Order = ({ order, orders, setOrders }) => {
     const { _id, orderId, name, email, status } = order;
     const [product, setProduct] = useState({});
-    const { img, price } = product;
+    // const { img, price } = product;
+
     const { admin } = useAuth();
 
     const [condition, setCondition] = useState(status);
@@ -89,11 +90,11 @@ const Order = ({ order, orders, setOrders }) => {
     return (
         <StyledTableRow>
             <StyledTableCell component="th" scope="row">
-                <img src={img} alt={product.name} height="60px" width="100%" />
+                <img src={product?.img} alt={product?.name} height="60px" width="100%" />
             </StyledTableCell>
             <StyledTableCell>{name}</StyledTableCell>
             <StyledTableCell>{email}</StyledTableCell>
-            <StyledTableCell>{price}</StyledTableCell>
+            <StyledTableCell>{product?.price}</StyledTableCell>
             <StyledTableCell>
                 {
                     condition === "Pending" && admin ? <Button onClick={() => handleStatus(_id)} color="secondary">{condition}</Button> : <Button color="secondary">{condition}</Button>
