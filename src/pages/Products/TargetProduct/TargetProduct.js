@@ -30,7 +30,13 @@ const TargetProduct = () => {
     }, [id]);
 
     const handleOrder = (id) => {
-        const orderDetails = { orderId: id, name: user.displayName, email: user.email, status: 'Pending' }
+        const orderDetails = {
+            orderId: id,
+            name: user.displayName,
+            email: user.email,
+            status: 'Pending',
+            price: product.price
+        }
         fetch(`https://frozen-dusk-78727.herokuapp.com/orders`, {
             method: 'POST',
             headers: {

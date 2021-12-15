@@ -22,7 +22,7 @@ const images = [
 
 function Banner() {
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1, mt: 8 }}>
             <AutoPlaySwipeableViews>
                 {images.map((image, index) => <Box key={index}
                     component="img"

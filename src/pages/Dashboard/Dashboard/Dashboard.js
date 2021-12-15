@@ -147,6 +147,7 @@ const Dashboard = () => {
 
         </Box>
     );
+
     return (
         <div>
             <Box sx={{ flexGrow: 1 }}>
